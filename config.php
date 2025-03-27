@@ -10,8 +10,4 @@ $conn = new mysqli($host, $user, $password, $database, $port);
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
-?>ew mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
 ?>
