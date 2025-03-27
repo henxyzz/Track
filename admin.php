@@ -1,54 +1,35 @@
-<?php
-include 'config.php';
-
-if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-    $conn->query("DELETE FROM devices WHERE id=$id");
-    header("Location: admin.php");
-}
-
-$result = $conn->query("SELECT * FROM devices ORDER BY timestamp DESC");
-?>
+<?php include "config.php"; ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Tracking</title>
-    <style>
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid black; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        a { text-decoration: none; color: red; }
-    </style>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body>
-    <h2>Admin Panel - Daftar Device</h2>
-    <table>
+<body class="container mt-5">
+    <h1 class="text-center">📊 Data Pengunjung</h1>
+    <table class="table table-bordered">
         <tr>
-            <th>ID</th>
             <th>IP</th>
-            <th>Negara</th>
-            <th>Kota</th>
-            <th>ISP</th>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Bot?</th>
-            <th>Action</th>
+            <th>Device</th>
+            <th>Browser</th>
+            <th>User Agent</th>
+            <th>Aksi</th>
         </tr>
-        <?php while ($row = $result->fetch_assoc()) { ?>
-            <tr>
-                <td><?= $row['id'] ?></td>
-                <td><?= $row['ip'] ?></td>
-                <td><?= $row['country'] ?></td>
-                <td><?= $row['city'] ?></td>
-                <td><?= $row['isp'] ?></td>
-                <td><?= $row['brand'] ?></td>
-                <td><?= $row['model'] ?></td>
-                <td><?= $row['is_bot'] ? 'YES' : 'NO' ?></td>
-                <td><a href="?delete=<?= $row['id'] ?>" onclick="return confirm('Yakin hapus?')">Hapus</a></td>
-            </tr>
-        <?php } ?>
+        <?php
+        $result = $conn->query("SELECT * FROM visitors");
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>
+                    <td>{$row['ip']}</td>
+                    <td>{$row['device']}</td>
+                    <td>{$row['browser']}</td>
+                    <td>{$row['user_agent']}</td>
+                    <td>
+                        <a href='delete.php?id={$row['id']}' class='btn btn-danger btn-sm'>Hapus</a>
+                    </td>
+                  </tr>";
+        }
+        ?>
     </table>
 </body>
 </html>

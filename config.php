@@ -1,5 +1,5 @@
 <?php
-$mysql_uri = "mysql://user:password@localhost/tracking_db"; // Ganti sesuai kredensial
+$mysql_uri = "mysql://undolvldxoi5pdjz:yLs0bVsz4S674Q2yWQ9@b5a9pf0n7clohxbsy3cb-mysql.services.clever-cloud.com:21442/b5a9pf0n7clohxbsy3cb"; // Ganti sesuai kredensial
 
 $uri_parts = parse_url($mysql_uri);
 
