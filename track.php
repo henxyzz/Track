@@ -21,7 +21,7 @@ elseif (strpos($agent, 'Edge') !== false) $browser = "Edge";
 elseif (strpos($agent, 'Opera') !== false) $browser = "Opera";
 
 // Simpan ke database
-$stmt = $conn->prepare("INSERT INTO visitors (ip, device, browser, user_agent) VALUES (?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO devices (ip, device, browser, user_agent) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("ssss", $ip, $device, $browser, $agent);
 $stmt->execute();
 $stmt->close();
